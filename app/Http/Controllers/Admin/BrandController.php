@@ -105,7 +105,7 @@ class BrandController extends Controller
     	      $notification=array('messege' => 'Brand Update!', 'alert-type' => 'success');
     	      return redirect()->back()->with($notification);
     	}else{
-		  $data['brand_logo']='public/files/brand/'.$request->old_logo;
+		  $data['brand_logo']=$request->old_logo;
 	      DB::table('brands')->where('id',$request->id)->update($data);
 	      $notification=array('messege' => 'Brand Update!', 'alert-type' => 'success');
 	      return redirect()->back()->with($notification);
