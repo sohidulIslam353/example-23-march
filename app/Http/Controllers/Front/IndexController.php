@@ -154,4 +154,30 @@ class IndexController extends Controller
     {
         return view('frontend.blog');
     }
+
+    //__campaign products__//
+    public function CampaignProduct($id)
+    {
+        $products=DB::table('campaign_product')->leftJoin('products','campaign_product.product_id','products.id')
+                    ->select('products.name','products.code','products.thumbnail','products.slug','campaign_product.*')
+                    ->where('campaign_product.campaign_id',$id)
+                    ->paginate(32);          
+        return view('frontend.campaign.product_list',compact('products'));
+    }
+
+    //__campaign product details__//
+    public function CampaignProductDetails($slug)
+    {
+        $product=Product::where('slug',$slug)->first();
+                 Product::where('slug',$slug)->increment('product_views');
+        $product_price=DB::table('campaign_product')->where('product_id',$product->id)->first();         
+        $related_product=DB::table('campaign_product')->leftJoin('products','campaign_product.product_id','products.id')
+                    ->select('products.name','products.code','products.thumbnail','products.slug','campaign_product.*')
+                    ->inRandomOrder(12)->get();
+        $review=Review::where('product_id',$product->id)->orderBy('id','DESC')->take(6)->get();
+        return view('frontend.campaign.product_details',compact('product','related_product','review','product_price'));
+
+    }
+
+
 }

@@ -32,18 +32,27 @@
     </div>
 
     @isset($campaign)
-     <div class="characteristics">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8">
-                    <strong style="text-align: center;">{{ $campaign->title }}</strong>
-                    <a href=""> <img src="{{ $campaign->image }}" style="width:100%;"> </a>
-                </div><br>
-                
+    @php 
+        $today=strtotime(date('Y-m-d'));
+        $campaign_start=strtotime($campaign->start_date);
+        $campaign_end=strtotime($campaign->end_date);
+        //tday 1648512000   //28   //end 1648684800
+      
+    @endphp
+     @if($today >= $campaign_start && $today <= $campaign_end)
+         <div class="characteristics">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+                        <strong style="text-align: center;">{{ $campaign->title }}</strong>
+                        <a href="{{ route('frontend.campaign.product',$campaign->id) }}"> <img src="{{ $campaign->image }}" style="width:100%;"> </a>
+                    </div><br>
+                    
+                </div>
             </div>
         </div>
-    </div>
+     @endif
     @endisset
     <!-- Characteristics -->
 

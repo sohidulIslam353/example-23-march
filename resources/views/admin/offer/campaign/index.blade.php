@@ -35,6 +35,7 @@
                     <thead>
                     <tr>
                       <th>Start Date</th>
+                      <th>End Date</th>
                       <th>Title</th>
                       <th>Image</th>
                       <th>Discount(%)</th>
@@ -152,6 +153,7 @@
 			ajax:"{{ route('campaign.index') }}",
 			columns:[
 				{data:'start_date',name:'start_date'},
+        {data:'end_date',name:'end_date'},
 				{data:'title'  ,name:'title'},
 				{data:'image',name:'image', render: function(data, type ,full,meta){
 					return "<img src=\"" +data+ "\"  height=\"30\" />";

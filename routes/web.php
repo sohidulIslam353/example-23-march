@@ -90,7 +90,9 @@ Route::group(['namespace'=>'App\Http\Controllers\Front'], function(){
     Route::get('/contact-us','IndexController@Contact')->name('contact');
     Route::get('/our-blog','IndexController@Blog')->name('blog');
     
-
+    //__campaign__//
+    Route::get('/campain/products/{id}','IndexController@CampaignProduct')->name('frontend.campaign.product');   
+    Route::get('/camapign-product-details/{slug}','IndexController@CampaignProductDetails')->name('campaign.product.details');
 });
 
 

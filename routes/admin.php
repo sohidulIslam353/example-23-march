@@ -94,6 +94,15 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware' =>'is_admi
 		Route::post('/update','CampaignController@update')->name('campaign.update');
 	});
 
+	//__campaign product routes__//
+	Route::group(['prefix'=>'campaign-product'], function(){
+		Route::get('/{campaign_id}','CampaignController@campaignProduct')->name('campaign.product');
+		Route::get('/add/{id}/{campaign_id}','CampaignController@ProductAddToCampaign')->name('add.product.to.campaign');
+		Route::get('/list/{campaign_id}','CampaignController@ProductListCampaign')->name('campaign.product.list');
+		Route::get('/remove/{id}','CampaignController@RemoveProduct')->name('product.remove.campaign');
+		// Route::post('/update','CampaignController@update')->name('campaign.update');
+	});
+
 	//__order 
 	Route::group(['prefix'=>'order'], function(){
 		Route::get('/','OrderController@index')->name('admin.order.index');
